@@ -5,7 +5,12 @@
       <map>
         <entry key="app/src/main/res/layout/activity_customer.xml" value="0.23125" />
         <entry key="app/src/main/res/layout/activity_driver.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_driver_map.xml" value="0.21614583333333334" />
+        <entry key="app/src/main/res/layout/activity_driver_maps.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14739583333333334" />
+        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.21614583333333334" />
+        <entry key="app/src/main/res/layout/activity_map.xml" value="0.21614583333333334" />
+        <entry key="app/src/main/res/layout/fragment_driver_login_activity.xml" value="0.21614583333333334" />
       </map>
     </option>
   </component>

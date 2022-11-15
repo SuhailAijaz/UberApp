@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,16 +20,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class DriverActivity extends AppCompatActivity {
+public class DriverLoginActivity extends AppCompatActivity {
      private EditText memail, mpassword;
      private Button login, register;
-FirebaseAuth mauth;
+     FirebaseAuth mauth;
     FirebaseAuth.AuthStateListener firebaseAuthListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver);
-        getSupportActionBar().setTitle("Driver Mode");
+
+        // working on action bar set color and text
+        ActionBarMenu();
 
         memail =(EditText) findViewById(R.id.ed_username);
         mpassword =(EditText) findViewById(R.id.ed_password);
@@ -40,7 +44,7 @@ FirebaseAuth mauth;
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
                 if(user!=null){
-                    Intent intent=new Intent(DriverActivity.this, MapActivity.class);
+                    Intent intent=new Intent(DriverLoginActivity.this, DriverMapsActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -53,15 +57,17 @@ FirebaseAuth mauth;
             public void onClick(View view) {
                 String email=memail.getText().toString();
                 String password=mpassword.getText().toString();
-                mauth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(DriverActivity.this, new OnCompleteListener<AuthResult>() {
+                mauth.signInWithEmailAndPassword(email,password).addOnCompleteListener(DriverLoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if(!task.isSuccessful()){
-                            Toast.makeText(DriverActivity.this, "Somenthing went worng", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DriverLoginActivity.this, "Somenthing went worng"+email+""+password, Toast.LENGTH_SHORT).show();
                         }
                         else{
-
+//                   Intent intent=new Intent(getApplicationContext(),DriverMapsActivity.class);
+//                   startActivity(intent);
+//                   return;
                         }
 
                     }
@@ -69,15 +75,12 @@ FirebaseAuth mauth;
 
             }
         });
-
-
-
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             String email=memail.getText().toString();
             String password=mpassword.getText().toString();
-            mauth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(DriverActivity.this, new OnCompleteListener<AuthResult>() {
+            mauth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(DriverLoginActivity.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(!task.isSuccessful()){
@@ -91,11 +94,16 @@ FirebaseAuth mauth;
 
                 }
             });
-
-
             }
         });
 
+    }
+
+    private void ActionBarMenu() {
+        getSupportActionBar().setTitle("Driver Login Activity");
+        ColorDrawable colorDrawable
+                = new ColorDrawable(Color.parseColor("#0F9D58"));
+        getSupportActionBar().setBackgroundDrawable(colorDrawable);
     }
 
     @Override

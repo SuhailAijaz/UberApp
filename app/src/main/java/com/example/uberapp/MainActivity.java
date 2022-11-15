@@ -16,9 +16,8 @@ private Button drButton,cusButton;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ColorDrawable colorDrawable=new ColorDrawable(Color.parseColor("#0000ff"));
-        getSupportActionBar().setTitle("Home Activity");
-        getSupportActionBar().setBackgroundDrawable(colorDrawable);
+
+        ActionBar();
 
         drButton=findViewById(R.id.driver_button);
         cusButton=findViewById(R.id.customer_button);
@@ -26,7 +25,7 @@ private Button drButton,cusButton;
         drButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    Intent intent=new Intent(MainActivity.this, DriverActivity.class);
+                    Intent intent=new Intent(MainActivity.this, DriverLoginActivity.class);
                     startActivity(intent);
                     finish();
             }
@@ -43,5 +42,11 @@ private Button drButton,cusButton;
             }
         });
 
+    }
+
+    private void ActionBar() {
+        ColorDrawable colorDrawable=new ColorDrawable(Color.parseColor("#0F9D58"));
+        getSupportActionBar().setTitle("Home Activity");
+        getSupportActionBar().setBackgroundDrawable(colorDrawable);
     }
 }
